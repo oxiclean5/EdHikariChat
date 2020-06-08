@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "191881412000-bopilv03bj84o89sb4urg51d3ucikjni.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.edhikarchat",
+            "certificate_hash": "64b940eb1997f86e387f47bca03f779e2b26b079"
+          }
+        },
+        {
           "client_id": "191881412000-l5mk2j6b0pacr8rjdkkt18e2mh504fkk.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

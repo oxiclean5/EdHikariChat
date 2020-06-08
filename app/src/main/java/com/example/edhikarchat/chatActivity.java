@@ -1,5 +1,8 @@
-package com.example.edhikarchat;
+//chat 클래스
 
+        package com.example.edhikarchat;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,17 +19,23 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Comment;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 public class chatActivity extends AppCompatActivity {
     private static final String TAG = "chatActivity";
     Button bt_finish;
-    private RecyclerView recyclerView;
-    MyAdapter mAdapter;
+
+    private RecyclerView recyclerView;                    //리사이클러 뷰, 어댑터, 레이아웃메니저저
+    //   MyAdapter mAdapter;
+    private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
+    private DatabaseReference databaseReference;
+    private ArrayList<User> arrayList;
     EditText ed_text;
     Button bt_send;
     String stid;
@@ -36,115 +45,75 @@ public class chatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        database = FirebaseDatabase.getInstance();
-
 
         stid = getIntent().getStringExtra("id");
-        bt_finish=(Button)findViewById(R.id.bt_finish);
-        bt_finish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+//        bt_finish=(Button)findViewById(R.id.bt_finish);     // 뒤로가기(로그인 창으로 돌아가기)
+//        bt_finish.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
 
-        bt_send = (Button)findViewById(R.id.bt_send);
+//        bt_send = (Button)findViewById(R.id.bt_send);      // 메세지 보내기
 
-        ed_text = (EditText)findViewById(R.id.ed_text);
+//        ed_text = (EditText)findViewById(R.id.ed_text);   // 텍스트
 
-        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        recyclerView.setHasFixedSize(true);
-
-        // use a linear layout manager
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);   // 리사이클 뷰
+        recyclerView.setHasFixedSize(true);                                // 리사이클러뷰 성능 강화
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+        arrayList = new ArrayList<>();                //User 객체를 담을 어레이리스트(어댑터쪽으로)
 
-        // specify an adapter (see also next example)
-        String [] myDataset = {"test1","test2","test3"};
-        mAdapter = new MyAdapter(myDataset);
-        recyclerView.setAdapter(mAdapter);
+        database = FirebaseDatabase.getInstance();    // 파이어베이스 연동
 
-        ChildEventListener childEventListener = new ChildEventListener() {
+        databaseReference = database.getReference("User");  // DB테이블 연결
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
-                Log.d(TAG, "onChildAdded:" + dataSnapshot.getKey());
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // 파이어베이스 데이터베이스의 데이터를 받아오는 부분
+                arrayList.clear(); // 기존 배열 초기화
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){  // 데이터 리스트 추출
+                    User user = snapshot.getValue(User.class);   // User 객체에 데이터 담기
+                    arrayList.add(user);   // 배열에 담은 데이터를 리사이클러 뷰로 보낼 준비
 
-                // A new comment has been added, add it to the displayed list
-                Chat chat = dataSnapshot.getValue(Chat.class);
-                String commentKey = dataSnapshot.getKey();
-                String sstid = chat.getStid();
-                String stext = chat.getText();
-                Log.d(TAG, "sstid: "+sstid);
-                Log.d(TAG, "stext: "+stext);
-
-                // ...
+                }
+                adapter.notifyDataSetChanged();  //리스트 저장 및 새로고침
             }
 
             @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String previousChildName) {
-                Log.d(TAG, "onChildChanged:" + dataSnapshot.getKey());
-
-                // A comment has changed, use the key to determine if we are displaying this
-                // comment and if so displayed the changed comment.
-
-
-                // ...
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-                Log.d(TAG, "onChildRemoved:" + dataSnapshot.getKey());
-
-                // A comment has changed, use the key to determine if we are displaying this
-                // comment and if so remove it.
-                String commentKey = dataSnapshot.getKey();
-
-                // ...
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String previousChildName) {
-                Log.d(TAG, "onChildMoved:" + dataSnapshot.getKey());
-
-                // A comment has changed position, use the key to determine if we are
-                // displaying this comment and if so move it.
-
-
-                // ...
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w(TAG, "postComments:onCancelled", databaseError.toException());
-                Toast.makeText(chatActivity.this, "Failed to load comments.",
-                        Toast.LENGTH_SHORT).show();
-            }
-        };
-        DatabaseReference ref = database.getReference("message");
-        ref.addChildEventListener(childEventListener);
-
-        bt_send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String text = ed_text.getText().toString();
-//                Toast.makeText(chatActivity.this, "MSG : "+text, Toast.LENGTH_SHORT).show();
-
-                // Write a message to the database
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("message");
-
-                Hashtable<String, String> numbers
-                        = new Hashtable<String, String>();
-                numbers.put("id", stid);
-                numbers.put("text", text);
-
-
-                myRef.setValue(numbers);
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // 디비를 가져오던 중 error 발생 시
+                Log.e(TAG, "chatActivity: ",databaseError.toException() );
             }
         });
+
+
+        adapter = new CustomAdapter(arrayList, this);
+        recyclerView.setAdapter(adapter);  // 리사이클러 뷰에 어댑터 연결
+//        ref.addChildEventListener(childEventListener);      위에 주석 해제할 때 같이 해제할 것
+
+
+
+
+//        bt_send.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String text = ed_text.getText().toString();
+////                Toast.makeText(chatActivity.this, "MSG : "+text, Toast.LENGTH_SHORT).show();
+//
+//                // Write a message to the database
+//                FirebaseDatabase database = FirebaseDatabase.getInstance();
+//                DatabaseReference myRef = database.getReference("message");
+//
+//                Hashtable<String, String> numbers
+//                        = new Hashtable<String, String>();
+//                numbers.put("id", stid);
+//                numbers.put("text", text);
+//                myRef.setValue(numbers);
+//
+//            }
+//        });
 
     }
 }
