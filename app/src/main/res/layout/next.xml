@@ -6,10 +6,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        app:menu="@menu/bottom_menu"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="584dp" />
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="100dp"-->
+<!--        app:menu="@menu/bottom_menu"-->
+<!--        tools:layout_editor_absoluteX="0dp"-->
+<!--        tools:layout_editor_absoluteY="584dp" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>
