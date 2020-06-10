@@ -4,16 +4,20 @@
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -40,11 +44,42 @@ public class chatActivity extends AppCompatActivity {
     Button bt_send;
     String stid;
     FirebaseDatabase database;
+    private BottomNavigationView bottomNavigationView; //바텀 네비게이션 뷰
+    private FragmentManager fm;
+    private FragmentTransaction ft;
+    private Flag_talking flag_talking;
+    private Flag_call flag_call;
+    private Flag_friend flag_friend;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+        bottomNavigationView = findViewById(R.id.bottom_navi);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch(menuItem.getItemId()){
+                    case R.id.action_friend:
+                        setFrag(0);
+                        break;
+                    case R.id.action_taking:
+                        setFrag(1);
+                        break;
+                    case R.id.action_call:
+                        setFrag(2);
+                        break;
+
+                }
+                return true;
+            }
+        });
+        flag_friend = new Flag_friend();
+        flag_talking = new Flag_talking();
+        flag_call = new Flag_call();
+
+        setFrag(0); // 첫 프래그 호출
 
         stid = getIntent().getStringExtra("id");
 //        bt_finish=(Button)findViewById(R.id.bt_finish);     // 뒤로가기(로그인 창으로 돌아가기)
@@ -115,5 +150,24 @@ public class chatActivity extends AppCompatActivity {
 //            }
 //        });
 
+    }
+    // 프래그먼트 교체 실행부분
+    private void setFrag(int n){
+        fm = getSupportFragmentManager();
+        ft = fm.beginTransaction();
+        switch (n){
+            case 0:
+                ft.replace(R.id.main_frame,flag_friend);
+                ft.commit();
+                break;
+            case 1:
+                ft.replace(R.id.main_frame,flag_talking);
+                ft.commit();
+                break;
+            case 2:
+                ft.replace(R.id.main_frame,flag_call);
+                ft.commit();
+                break;
+        }
     }
 }
