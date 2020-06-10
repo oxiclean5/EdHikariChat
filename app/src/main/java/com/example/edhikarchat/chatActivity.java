@@ -32,7 +32,7 @@ import java.util.Hashtable;
 
 public class chatActivity extends AppCompatActivity {
     private static final String TAG = "chatActivity";
-    Button bt_finish;
+
 
     private RecyclerView recyclerView;                    //리사이클러 뷰, 어댑터, 레이아웃메니저저
     //   MyAdapter mAdapter;
@@ -40,10 +40,12 @@ public class chatActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private DatabaseReference databaseReference;
     private ArrayList<User> arrayList;
+    FirebaseDatabase database;
+
+    Button bt_finish;
     EditText ed_text;
     Button bt_send;
     String stid;
-    FirebaseDatabase database;
     private BottomNavigationView bottomNavigationView; //바텀 네비게이션 뷰
     private FragmentManager fm;
     private FragmentTransaction ft;

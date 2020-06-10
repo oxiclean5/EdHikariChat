@@ -16,7 +16,7 @@ public class Flag_friend extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.flag_friend,container,false);
+        view = inflater.inflate(R.layout.flag_call,container,false);
 
         return view;
     }
