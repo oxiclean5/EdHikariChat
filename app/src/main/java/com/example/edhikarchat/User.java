@@ -3,8 +3,9 @@ package com.example.edhikarchat;
 public class User {
     private String profile;
     private String id;
-    private String pwd;
+//    private String pwd;
     private String userName;
+    private String statusmessage;
 
     public User(){}
 
@@ -24,19 +25,19 @@ public class User {
         this.id = id;
     }
 
-    public String getPwd() {
-        return pwd;
-    }
-
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
-    }
-
     public String getUserName() {
         return userName;
     }
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+        public String getStatusmessage() {
+        return statusmessage;
+    }
+
+    public void setStatusmessage(String statusmessage) {
+        this.statusmessage = statusmessage;
     }
 }

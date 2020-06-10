@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_friend"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_supervisor_account_24"
+        android:title="친구"/>
+    <item
+        android:id="@+id/action_taking"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_message_24"
+        android:title="대화"/>
+    <item
+        android:id="@+id/action_call"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_phone_24"
+        android:title="전화"/>
+
+
+</menu>

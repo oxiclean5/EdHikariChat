@@ -38,8 +38,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         Glide.with(holder.itemView)
                 .load(arrayList.get(position).getProfile())
                 .into(holder.iv_profile);
-        holder.tv_id.setText(arrayList.get(position).getId());
-        holder.tv_name.setText(arrayList.get(position).getUserName());
+        holder.tv_id.setText(String.valueOf(arrayList.get(position).getId()));
+        holder.tv_name.setText(String.valueOf(arrayList.get(position).getUserName()));
+        holder.tv_message.setText(String.valueOf(arrayList.get(position).getStatusmessage()));
     }
 
     @Override
@@ -51,6 +52,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         ImageView iv_profile;
         TextView tv_id;
         TextView tv_name;
+        TextView tv_message;
 
 
 
@@ -59,6 +61,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             this.iv_profile = itemView.findViewById(R.id.iv_profile);
             this.tv_id = itemView.findViewById(R.id.tv_id);
             this.tv_name = itemView.findViewById(R.id.tv_name);
+            this.tv_message= itemView.findViewById(R.id.tv_message);
         }
     }
 }
