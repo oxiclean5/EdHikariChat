@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">EdHikar Chat</string>
+    <string name="title_activity_tab">MainActivity</string>
+    <string name="title_friends">친구</string>
+    <string name="title_chating">채팅</string>
+    <string name="title_profile">프로필</string>
 </resources>

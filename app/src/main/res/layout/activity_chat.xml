@@ -26,13 +26,6 @@
 <!--        app:layout_constraintBottom_toBottomOf="@id/recycler_view"-->
         />
 
-    <FrameLayout
-        android:id="@+id/main_frame"
-        android:layout_width="match_parent"
-        android:layout_height="659dp"
-        app:layout_constraintBottom_toTopOf="@id/bottom_navi"
-        app:layout_constraintTop_toTopOf="parent"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
@@ -43,16 +36,6 @@
         />
 
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:itemIconTint="#9D6DF3"
-        app:itemTextColor="#000000"
-        app:menu="@menu/bottom_menu"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="16dp"
-        />
 
 
     <!--        app:layout_constraintBottom_toTopOf="@id/bt_send"-->

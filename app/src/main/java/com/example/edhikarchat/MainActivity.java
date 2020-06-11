@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                         String UserName = user.getDisplayName();
                         Log.d(TAG, "UserId: "+UserId+", UserName: "+UserName);
 
-                        in = new Intent(MainActivity.this, chatActivity.class);
+                        in = new Intent(MainActivity.this, TabActivity.class);
                         in.putExtra("id",stid);
                         startActivity(in);
 //                        updateUI(user);
