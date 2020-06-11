@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -74,6 +76,11 @@ public class MainActivity extends AppCompatActivity {
                         String UserId = user.getEmail();
                         String UserName = user.getDisplayName();
                         Log.d(TAG, "UserId: "+UserId+", UserName: "+UserName);
+
+                        SharedPreferences sharedPref = getSharedPreferences("shared",Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putString("UserId : ",UserId);
+                        editor.commit();
 
                         in = new Intent(MainActivity.this, TabActivity.class);
                         in.putExtra("id",stid);
