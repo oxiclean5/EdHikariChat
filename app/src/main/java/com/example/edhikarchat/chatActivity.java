@@ -39,7 +39,7 @@ public class chatActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private DatabaseReference databaseReference;
-    private ArrayList<User> arrayList;
+//    private ArrayList<User> arrayList;
     FirebaseDatabase database;
 
     Button bt_finish;
@@ -96,38 +96,38 @@ public class chatActivity extends AppCompatActivity {
 
 //        ed_text = (EditText)findViewById(R.id.ed_text);   // 텍스트
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);   // 리사이클 뷰
-        recyclerView.setHasFixedSize(true);                                // 리사이클러뷰 성능 강화
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        arrayList = new ArrayList<>();                //User 객체를 담을 어레이리스트(어댑터쪽으로)
+//        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);   // 리사이클 뷰
+//        recyclerView.setHasFixedSize(true);                                // 리사이클러뷰 성능 강화
+//        layoutManager = new LinearLayoutManager(this);
+//        recyclerView.setLayoutManager(layoutManager);
+//        arrayList = new ArrayList<>();                //User 객체를 담을 어레이리스트(어댑터쪽으로)
+//
+//        database = FirebaseDatabase.getInstance();    // 파이어베이스 연동
+//
+//        databaseReference = database.getReference("User");  // DB테이블 연결
+//        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                // 파이어베이스 데이터베이스의 데이터를 받아오는 부분
+//                arrayList.clear(); // 기존 배열 초기화
+//                for(DataSnapshot snapshot : dataSnapshot.getChildren()){  // 데이터 리스트 추출
+//                    User user = snapshot.getValue(User.class);   // User 객체에 데이터 담기
+//                    arrayList.add(user);   // 배열에 담은 데이터를 리사이클러 뷰로 보낼 준비
+//
+//                }
+//                adapter.notifyDataSetChanged();  //리스트 저장 및 새로고침
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//                // 디비를 가져오던 중 error 발생 시
+//                Log.e(TAG, "chatActivity: ",databaseError.toException() );
+//            }
+//        });
 
-        database = FirebaseDatabase.getInstance();    // 파이어베이스 연동
 
-        databaseReference = database.getReference("User");  // DB테이블 연결
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                // 파이어베이스 데이터베이스의 데이터를 받아오는 부분
-                arrayList.clear(); // 기존 배열 초기화
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){  // 데이터 리스트 추출
-                    User user = snapshot.getValue(User.class);   // User 객체에 데이터 담기
-                    arrayList.add(user);   // 배열에 담은 데이터를 리사이클러 뷰로 보낼 준비
-
-                }
-                adapter.notifyDataSetChanged();  //리스트 저장 및 새로고침
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // 디비를 가져오던 중 error 발생 시
-                Log.e(TAG, "chatActivity: ",databaseError.toException() );
-            }
-        });
-
-
-        adapter = new CustomAdapter(arrayList, this);
-        recyclerView.setAdapter(adapter);  // 리사이클러 뷰에 어댑터 연결
+//        adapter = new UserAdapter(arrayList, this);
+//        recyclerView.setAdapter(adapter);  // 리사이클러 뷰에 어댑터 연결
 //        ref.addChildEventListener(childEventListener);      위에 주석 해제할 때 같이 해제할 것
 
 
