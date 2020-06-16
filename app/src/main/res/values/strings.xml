@@ -4,4 +4,13 @@
     <string name="title_friends">친구</string>
     <string name="title_chating">채팅</string>
     <string name="title_profile">프로필</string>
+    <string name="title_activity_member">MemberActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
 </resources>

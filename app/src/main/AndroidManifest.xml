@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.edhikarchat">
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,9 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".MemberActivity"></activity>
+        <activity
+            android:name=".ui.login.MemberActivity"
+            android:label="@string/title_activity_member" />
         <activity
             android:name=".TabActivity"
-            android:label="@string/title_activity_tab"></activity>
+            android:label="@string/title_activity_tab" />
         <activity android:name=".chatActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
