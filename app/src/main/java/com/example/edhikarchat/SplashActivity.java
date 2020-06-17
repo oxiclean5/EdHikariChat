@@ -20,8 +20,9 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 //spalsh 엑티비티 실행
-                startActivity(new Intent(getApplication(),MainActivity.class));
-                splash.this.finish();
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         },SPLASH_DP_TIME);
 
