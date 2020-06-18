@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
      Button main_create;
      ProgressBar progressbar;
     FirebaseDatabase database;
+    Intent talk_in;
 
 
     @Override
@@ -91,6 +92,9 @@ public class MainActivity extends AppCompatActivity {
 
                         chat_in = new Intent(MainActivity.this, TabActivity.class);
                         chat_in.putExtra("id",stid);
+//                        talk_in = new Intent(MainActivity.this, TalkActivity.class);
+//                        talk_in.putExtra("name",name);
+
                         startActivity(chat_in);
 //                        updateUI(user);
                     } else {

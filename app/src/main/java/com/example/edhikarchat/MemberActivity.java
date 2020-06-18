@@ -35,6 +35,7 @@ public class MemberActivity extends AppCompatActivity {
     ProgressBar progressbar;
     private FirebaseAuth mAuth;
     FirebaseDatabase database;
+    Intent talk_in;
 
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {
@@ -205,6 +206,9 @@ private FirebaseAuth firebaseAuth;
                                 reference.child(uid).setValue(hashMap);
 
 
+                               // 가입시 Talk엑티비티에 이름 정보를 보냄
+                                talk_in = new Intent(MemberActivity.this, TalkActivity.class);
+                                talk_in.putExtra("name",name);
                                 //가입이 이루어져을시 가입 화면을 빠져나감.
                                 Intent intent = new Intent(MemberActivity.this, MainActivity.class);
                                 startActivity(intent);

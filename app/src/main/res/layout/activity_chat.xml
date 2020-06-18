@@ -10,7 +10,6 @@
 <!--        android:id="@+id/bt_finish"-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->
-
 <!--        android:text="finish"-->
 <!--        app:layout_constraintLeft_toRightOf="parent"-->
 <!--        app:layout_constraintStart_toStartOf="parent"-->
@@ -26,14 +25,14 @@
 <!--        app:layout_constraintBottom_toBottomOf="@id/recycler_view"-->
         />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:paddingTop="9dp"
-        android:paddingBottom="9dp"
-        />
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/recycler_view"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:clipToPadding="false"-->
+<!--        android:paddingTop="9dp"-->
+<!--        android:paddingBottom="9dp"-->
+<!--        />-->
 
 
 
