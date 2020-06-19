@@ -12,7 +12,7 @@
         android:id="@+id/splash"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/img"/>
+        android:src="@drawable/img2"/>
 <!--        drawable에 이미지 파일 넣고 src = "@drawable/에 이미지 이름쓰기 -->
 
 </LinearLayout>

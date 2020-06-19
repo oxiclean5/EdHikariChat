@@ -29,6 +29,7 @@ public class TalkActivity extends AppCompatActivity {
     FirebaseDatabase database;
     String tname;
     String ttext;
+    String tid;
     EditText ed_text;
     Button bt_send;
     private static final String TAG = "TalkActivity";
@@ -40,7 +41,7 @@ public class TalkActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_talk);
-
+        tid = getIntent().getStringExtra("id");
         tname = getIntent().getStringExtra("userName");
 //        bt_send = (Button) findViewById(R.id.bt_send);
 //        ed_text = (EditText) findViewById(R.id.ed_text);
@@ -140,7 +141,7 @@ public class TalkActivity extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         talkArrayList = new ArrayList<>();
-        tname = getIntent().getStringExtra("userName");
+//        tname = getIntent().getStringExtra("userName");
 
         ed_text = (EditText)findViewById(R.id.ed_text);
         bt_send = (Button)findViewById(R.id.bt_send);
@@ -149,7 +150,7 @@ public class TalkActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-//        myAdapter = new MyAdapter(talkArrayList, tname);
+        myAdapter = new MyAdapter(talkArrayList, tid);
         recyclerView.setAdapter(myAdapter);
         Log.d(TAG, "onCreate: called");
 
@@ -164,10 +165,13 @@ public class TalkActivity extends AppCompatActivity {
                 // A new comment has been added, add it to the displayed list
                 Chat chat = dataSnapshot.getValue(Chat.class);
                 String commentKey = dataSnapshot.getKey();
+                String tid = chat.getId();
                 String tname = chat.getName();
                 String ttext = chat.getText();
-                Log.d(TAG, "tname: "+tname);
+                Log.d(TAG, "tid: "+tid);
                 Log.d(TAG, "ttext: "+ttext);
+                talkArrayList.add(chat);
+                myAdapter.notifyDataSetChanged();
                 // ...
             }
 
@@ -235,9 +239,11 @@ public class TalkActivity extends AppCompatActivity {
                 DatabaseReference myRef = database.getReference("message").child(datetime);
 
                 Hashtable<String, String> numbers = new Hashtable<String, String>();
-                numbers.put("name",tname);
+                numbers.put("id",tid);
                 numbers.put("text",ttext);
+                numbers.put("name",tname);
                 myRef.setValue(numbers);
+
             }
         });
 //        tname = getIntent().getStringExtra("name");
