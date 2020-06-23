@@ -51,11 +51,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                                                      int viewType) {
         // create a new view
         View v =  LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.others_text_view, parent, false);
+                .inflate(R.layout.my_text_view, parent, false);
 
         if(viewType ==1){
             v =  LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.my_text_view, parent, false);
+                    .inflate(R.layout.others_text_view, parent, false);
         } else{
 
         }
