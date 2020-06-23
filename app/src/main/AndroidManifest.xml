@@ -28,7 +28,6 @@
         <activity
             android:name=".TabActivity"
             android:label="@string/title_activity_tab" />
-        <activity android:name=".chatActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

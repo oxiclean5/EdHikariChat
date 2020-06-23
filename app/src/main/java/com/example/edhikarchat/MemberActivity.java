@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.edhikarchat.ui.notifications.ProfileFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -209,6 +211,10 @@ private FirebaseAuth firebaseAuth;
                                // 가입시 Talk엑티비티에 이름 정보를 보냄
                                 talk_in = new Intent(MemberActivity.this, TalkActivity.class);
                                 talk_in.putExtra("name",name);
+                                Intent profile_in = new Intent(MemberActivity.this, ProfileFragment.class);
+                                profile_in.putExtra("uid",uid);
+                                startActivity(profile_in);
+
                                 //가입이 이루어져을시 가입 화면을 빠져나감.
                                 Intent intent = new Intent(MemberActivity.this, MainActivity.class);
                                 startActivity(intent);

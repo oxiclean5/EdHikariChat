@@ -28,9 +28,15 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.edhikarchat.R;
+import com.example.edhikarchat.TalkActivity;
 import com.example.edhikarchat.UserAdapter;
+import com.example.edhikarchat.ui.home.HomeFragment;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -38,6 +44,8 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Dictionary;
+import java.util.HashMap;
 
 public class ProfileFragment extends Fragment {
     int REQUEST_IMAGE_CODE = 1001;
@@ -47,9 +55,13 @@ public class ProfileFragment extends Fragment {
     private NotificationsViewModel notificationsViewModel;
     private static final String TAG = "ProfileFragment";
     File localFile;
-    EditText ed_message;
-    Button bt_message;
+    TextView t_message;
+    TextView t_name;
     Intent intent;
+    String uid;
+    Button bt_message;
+
+    private FirebaseAuth firebaseAuth;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -63,22 +75,29 @@ public class ProfileFragment extends Fragment {
 //                textView.setText(s);
 //            }
 //        });
-
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference reference = database.getReference("User");
+//        //uid 받아와서 이걸로 업데이트 하기
+//        uid = intent.getIntent().getStringExtra("uid");
+//        reference.child(uid).setValue(hashMap);
 
         SharedPreferences sharedPref = getActivity().getSharedPreferences("shared",Context.MODE_PRIVATE);
         String stid;
 
         mStorageRef = FirebaseStorage.getInstance().getReference();
 
-//        ed_message = root.findViewById(R.id.ed_message);
-//        bt_message = root.findViewById(R.id.bt_message);
-//        bt_message.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String state = ed_message.getText().toString();
-//                intent = new Intent(getActivity(), )
-//            }
-//        });
+        t_message = root.findViewById(R.id.t_message);
+        t_name = root.findViewById(R.id.t_name);
+        bt_message = root.findViewById(R.id.bt_message);
+        bt_message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            String strname = t_name.getText().toString();
+            String strmessage = t_name.getText().toString();
+
+
+            }
+        });
 
         if (ContextCompat.checkSelfPermission(getActivity(),
                 Manifest.permission.READ_EXTERNAL_STORAGE)
