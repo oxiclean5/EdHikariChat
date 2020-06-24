@@ -30,10 +30,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public int getItemViewType(int position) {
 //        return super.getItemViewType(position);
-    if(mDataset.get(position).id.equals(MyId)){
+
+        if(mDataset.get(position).id.equals(MyId)){
         return 1;
 
-    } else {
+        } else {
         return 2;
     }
 

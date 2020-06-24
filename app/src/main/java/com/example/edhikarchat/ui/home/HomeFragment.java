@@ -133,8 +133,9 @@ public class HomeFragment extends Fragment implements UserAdapter.OnNoteListener
 //        startActivity(intent);
         Log.d(TAG, "onNoteClick: clicked.");
         Intent intent = new Intent(getActivity(), TalkActivity.class);
+
 //        intent.putExtra("id".id);
-//        intent.putExtra("userName", arraylist.get(postion).getUserName());
+        intent.putExtra("userName", arraylist.get(postion).getUserName());
         intent.putExtra("id", arraylist.get(postion).getId());
         startActivity(intent);
     }

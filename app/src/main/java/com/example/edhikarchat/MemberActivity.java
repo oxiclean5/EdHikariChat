@@ -210,7 +210,7 @@ private FirebaseAuth firebaseAuth;
 
                                // 가입시 Talk엑티비티에 이름 정보를 보냄
                                 talk_in = new Intent(MemberActivity.this, TalkActivity.class);
-                                talk_in.putExtra("name",name);
+                                talk_in.putExtra("userName",name);
                                 Intent profile_in = new Intent(MemberActivity.this, ProfileFragment.class);
                                 profile_in.putExtra("uid",uid);
                                 startActivity(profile_in);

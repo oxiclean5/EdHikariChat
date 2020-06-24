@@ -50,12 +50,21 @@
         android:layout_margin="55dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/main_googlelogin"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        app:layout_constraintTop_toTopOf="@id/main_login"
+        android:layout_margin="55dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
     <Button
         android:id="@+id/main_create"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="Sign up for membership"
-        app:layout_constraintTop_toTopOf="@id/main_login"
+        app:layout_constraintTop_toTopOf="@id/main_googlelogin"
         android:layout_margin="55dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
