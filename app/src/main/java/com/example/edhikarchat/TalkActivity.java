@@ -2,10 +2,12 @@ package com.example.edhikarchat;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -53,7 +56,7 @@ public class TalkActivity extends AppCompatActivity {
     EditText ed_text;
     Button bt_send;
     private static final String TAG = "TalkActivity";
-    MyAdapter myAdapter;
+//    MyAdapter myAdapter;
     RecyclerView recyclerView;
     ArrayList<Chat> talkArrayList;
     private RecyclerView.LayoutManager layoutManager;
@@ -93,7 +96,7 @@ public class TalkActivity extends AppCompatActivity {
                 SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM--dd hh:mm:ss");
                 String datetime = dateformat.format(c.getTime());
 
-                Chat chat = new Chat (ed_text.getText().toString(), tname, tphoto,null);
+                Chat chat = new Chat(ed_text.getText().toString(), tname, tphoto, null);
                 reference.child(MESSAGE_CHILD).push().setValue(chat);
                 ed_text.setText("");
             }
@@ -102,28 +105,33 @@ public class TalkActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);      //리사이클러뷰 강화
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
-        if(firebaseUser == null){
+        if (firebaseUser == null) {
             startActivity(new Intent(this, MemberActivity.class));
             finish();
             return;
-        } else{
-            tname = firebaseUser.getDisplayName();
-            if(firebaseUser.getPhotoUrl() != null){
+        } else {
+            tname = getIntent().getStringExtra("userName");
+            if (firebaseUser.getPhotoUrl() != null) {
                 tphoto = firebaseUser.getPhotoUrl().toString();
             }
-
         }
+
+
         Query query = reference.child(MESSAGE_CHILD);
         FirebaseRecyclerOptions<Chat> options = new FirebaseRecyclerOptions.Builder<Chat>()
                 .setQuery(query, Chat.class).build();
 
         firebaseAdapter = new FirebaseRecyclerAdapter<Chat, MessageViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(MessageViewHolder holder, int position, Chat chat) {
-                holder.tv_chat.setText(chat.getText());
-                holder.ttv_name.setText(chat.getText());
-                if(chat.getPhotoUrl()==null){
-
+            protected void onBindViewHolder(MessageViewHolder holder, int position, Chat model) {
+                holder.tv_chat.setText(model.getText());
+                holder.ttv_name.setText(model.getText());
+                if (model.getPhotoUrl() == null) {
+                    holder.tiv_profile.setImageDrawable(ContextCompat.getDrawable(TalkActivity.this,
+                            R.drawable.ic_baseline_face_24));
+                } else {
+                    Glide.with(TalkActivity.this).load(model.getPhotoUrl())
+                            .into(holder.tiv_profile);
                 }
             }
 
@@ -136,6 +144,22 @@ public class TalkActivity extends AppCompatActivity {
             }
         };
 
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(firebaseAdapter);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        firebaseAdapter.startListening();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        firebaseAdapter.stopListening();
+    }
+}
 //
 //
 //        database = FirebaseDatabase.getInstance();
@@ -246,5 +270,5 @@ public class TalkActivity extends AppCompatActivity {
 //            }
 //        });
 
-    }
-}
+//    }
+//}

@@ -7,11 +7,11 @@ public class Chat {
     String photoUrl;
     String imageUrl;
 
-    public Chat(String s, String tname, String tphoto) {
+    public Chat() {
     }
 
-    public Chat(String id, String name, String photoUrl, String imageUrl) {
-        this.id = id;
+    public Chat(String text, String name, String photoUrl, String imageUrl) {
+        this.text = text;
         this.name = name;
         this.photoUrl = photoUrl;
         this.imageUrl = imageUrl;

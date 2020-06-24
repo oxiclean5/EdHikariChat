@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                         chat_in = new Intent(MainActivity.this, TabActivity.class);
                         chat_in.putExtra("id",stid);
 //                        talk_in = new Intent(MainActivity.this, TalkActivity.class);
-//                        talk_in.putExtra("name",name);
+//                        talk_in.putExtra("UserName",name);
 
                         startActivity(chat_in);
 //                        updateUI(user);
