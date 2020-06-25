@@ -580,7 +580,7 @@ public class TalkActivity extends AppCompatActivity {
                 numbers.put("text",ttext);
                 numbers.put("name",tname);
                 myRef.setValue(numbers);
-
+                ed_text.setText("");
             }
         });
 
