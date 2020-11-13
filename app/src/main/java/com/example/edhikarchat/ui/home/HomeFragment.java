@@ -123,7 +123,7 @@ public class HomeFragment extends Fragment implements UserAdapter.OnNoteListener
         return v;
 
 
-        
+
     }
 
 
