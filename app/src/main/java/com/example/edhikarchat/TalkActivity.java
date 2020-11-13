@@ -506,6 +506,7 @@ public class TalkActivity extends AppCompatActivity {
                 String tname = chat.getName();
                 String ttext = chat.getText();
                 Log.d(TAG, "tid: "+tid);
+                Log.d(TAG, "tname: "+tid);
                 Log.d(TAG, "ttext: "+ttext);
                 talkArrayList.add(chat);
                 myAdapter.notifyDataSetChanged();

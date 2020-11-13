@@ -111,10 +111,12 @@ public class MainActivity extends AppCompatActivity{
 
                                     chat_in = new Intent(MainActivity.this, TabActivity.class);
                                     chat_in.putExtra("id", stid);
-//                        talk_in = new Intent(MainActivity.this, TalkActivity.class);
-//                        talk_in.putExtra("UserName",name);
-
                                     startActivity(chat_in);
+
+                        talk_in = new Intent(MainActivity.this, TalkActivity.class);
+                        talk_in.putExtra("id",stid);
+
+
 //                        updateUI(user);
                                 } else {
                                     // If sign in fails, display a message to the user.
